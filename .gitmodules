@@ -1,0 +1,6 @@
+[submodule "API/CodePulse.API"]
+	path = API/CodePulse.API
+	url = git@github.com:waizin28/CodePulse.git
+[submodule "UI/codepulse"]
+	path = UI/codepulse
+	url = git@github.com:waizin28/CodePulse.git
