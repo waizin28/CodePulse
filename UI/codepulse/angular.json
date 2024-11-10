@@ -3,19 +3,9 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "codepulse": {
+    "codepulse2": {
       "projectType": "application",
-      "schematics": {
-        "@schematics/angular:component": {
-          "standalone": true
-        },
-        "@schematics/angular:directive": {
-          "standalone": true
-        },
-        "@schematics/angular:pipe": {
-          "standalone": true
-        }
-      },
+      "schematics": {},
       "root": "",
       "sourceRoot": "src",
       "prefix": "app",
@@ -23,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/codepulse",
+            "outputPath": "dist/codepulse2",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": [
@@ -70,10 +60,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "codepulse:build:production"
+              "browserTarget": "codepulse2:build:production"
             },
             "development": {
-              "browserTarget": "codepulse:build:development"
+              "browserTarget": "codepulse2:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -81,7 +71,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "codepulse:build"
+            "browserTarget": "codepulse2:build"
           }
         },
         "test": {
