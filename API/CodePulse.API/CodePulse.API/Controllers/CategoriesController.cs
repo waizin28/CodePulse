@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CodePulse.API.Controllers
 {
-    [Route("/api/categories")]
+    [Route("/api/[controller]")]
     [ApiController]
     public class CategoriesController : ControllerBase
     {
@@ -37,6 +37,26 @@ namespace CodePulse.API.Controllers
                 UrlHandle = category.UrlHandle
             };
             
+            return Ok(response);
+        }
+
+        // http://localhost:5053/api/Categories
+        [HttpGet]
+        public async Task<ActionResult> GetAllCategories()
+        {
+            var categories = await _categoryRepository.GetAllAsync();
+            // Map Domain model to DTO
+            var response = new List<CategoryDto>();
+            foreach (var category in categories)
+            {
+                response.Add(new CategoryDto
+                {
+                    Id = category.Id,
+                    Name = category.Name,
+                    UrlHandle = category.UrlHandle
+                });
+            }
+
             return Ok(response);
         }
     }

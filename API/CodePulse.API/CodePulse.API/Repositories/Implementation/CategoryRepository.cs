@@ -1,6 +1,7 @@
 using CodePulse.API.Data;
 using CodePulse.API.Models.Domain;
 using CodePulse.API.Repositories.Interface;
+using Microsoft.EntityFrameworkCore;
 
 namespace CodePulse.API.Repositories.Implementation;
 // only deal with Domain model not DTO
@@ -18,5 +19,10 @@ public class CategoryRepository: ICategoryRepository
         await _dbContext.Categories.AddAsync(category);
         await _dbContext.SaveChangesAsync();
         return category;
+    }
+
+    public async Task<IEnumerable<Category>> GetAllAsync()
+    {
+        return await _dbContext.Categories.ToListAsync();
     }
 }
