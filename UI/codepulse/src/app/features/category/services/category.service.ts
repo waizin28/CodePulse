@@ -18,7 +18,7 @@ export class CategoryService {
     );
   }
 
-  getAllCategory(): Observable<Category[]> {
+  getAllCategories(): Observable<Category[]> {
     return this.http.get<Category[]>(
       `${environment.apiBaseUrl}/api/categories`
     );
