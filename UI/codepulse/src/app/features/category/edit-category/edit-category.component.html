@@ -1,1 +1,45 @@
-<h1>{{ id }}</h1>
+<div class="container">
+  <h1 class="mt-3">Edit Category</h1>
+  <ng-container **ngIf="category; else notFound">
+    <form>
+      <div class="mt-2">
+        <div class="mt-3">
+          <label for="categoryId">Category Id</label>
+          <input
+            input="text"
+            disabled
+            id="categoryId"
+            name="categoryId"
+            class="form-control"
+            value="{{ category.id }}"
+          />
+        </div>
+
+        <div class="mt-3">
+          <label for="categoryName">Category Name</label>
+          <input
+            input="text"
+            id="categoryName"
+            name="categoryName"
+            class="form-control"
+            value="{{ category.name }}"
+          />
+        </div>
+
+        <div class="mt-3">
+          <label for="categoryUrlHandle">Category Url Handle</label>
+          <input
+            input="text"
+            id="categoryUrlHandle"
+            name="categoryUrlHandle"
+            class="form-control"
+            value="{{ category.urlHandle }}"
+          />
+        </div>
+      </div>
+    </form>
+  </ng-container>
+  <ng-template #notFound>
+    <div class="alert alert-warning" role="alert">Category not found!</div>
+  </ng-template>
+</div>
