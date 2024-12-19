@@ -40,12 +40,23 @@
 
       <div class="mt-3">
         <label for="content" class="form-label">Content</label>
-        <textarea
-          class="form-control"
-          name="content"
-          id="content"
-          [(ngModel)]="addBlogModel.content"
-        ></textarea>
+
+        <div class="d-flex flex-row">
+          <!-- Actual text -->
+          <div class="col-6 p-2">
+            <textarea
+              class="form-control"
+              style="height: 350px; max-height: 350px"
+              name="content"
+              id="content"
+              [(ngModel)]="addBlogModel.content"
+            ></textarea>
+          </div>
+          <!-- Want to show live preview of the content markdown -->
+          <div class="col-6 p-2" style="max-height: 350px; overflow-y: scroll">
+            <markdown [data]="addBlogModel.content"></markdown>
+          </div>
+        </div>
       </div>
 
       <div class="mt-3">
