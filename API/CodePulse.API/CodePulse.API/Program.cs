@@ -20,6 +20,7 @@ builder.Services.AddSwaggerGen();
 
 //injecting service 
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
+builder.Services.AddScoped<IBlogPostRepository, BlogPostRepository>();
 
 var app = builder.Build();
 

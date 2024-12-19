@@ -12,5 +12,4 @@ public class BlogPost
     public string Author { get; set; }
     public bool IsVisible { get; set; }
     
-    
 }
