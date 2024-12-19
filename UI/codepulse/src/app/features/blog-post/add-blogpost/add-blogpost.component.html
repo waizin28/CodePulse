@@ -61,8 +61,21 @@
 
       <div class="mt-3">
         <label for="featuredImageUrl" class="form-label"
-          >Featured Image Url</label
-        >
+          >Featured Image Url
+          <!-- <button type="button" class="btn btn-light" (click)="openImageSelector()">Select Image</button> -->
+        </label>
+
+        <ng-container *ngIf="addBlogModel.featuredImageUrl !== ''">
+          <div>
+            <img
+              [src]="addBlogModel.featuredImageUrl"
+              height="100"
+              class="my-2"
+              alt="Featured Image"
+            />
+          </div>
+        </ng-container>
+
         <input
           type="text"
           id="featuredImageUrl"
