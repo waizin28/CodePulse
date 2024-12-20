@@ -1,6 +1,7 @@
 using CodePulse.API.Data;
 using CodePulse.API.Models.Domain;
 using CodePulse.API.Repositories.Interface;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.EntityFrameworkCore;
 
 namespace CodePulse.API.Repositories.Implementation;
@@ -32,5 +33,26 @@ public class BlogPostRepository: IBlogPostRepository
     public async Task<BlogPost?> GetByIdAsync(Guid id)
     {
         return await _dbContext.BlogPosts.Include(x => x.Categories).FirstOrDefaultAsync(x => x.Id == id);
+    }
+
+    public async Task<BlogPost?> UpdateAsync(BlogPost blogPost)
+    {
+        // fetch blogpost using id
+        var existingBlogPost = await _dbContext.BlogPosts.Include(x => x.Categories).FirstOrDefaultAsync(x => x.Id == blogPost.Id);
+
+        if (existingBlogPost == null)
+        {
+            return null;
+        }
+        
+        // Update Blogpost
+        _dbContext.Entry(existingBlogPost).CurrentValues.SetValues(blogPost);
+        
+        // Update Categories
+        existingBlogPost.Categories = blogPost.Categories;
+        
+        await _dbContext.SaveChangesAsync();
+        
+        return blogPost;
     }
 }

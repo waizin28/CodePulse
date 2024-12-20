@@ -146,5 +146,67 @@ namespace CodePulse.API.Controllers
             
             return Ok(response);
         }
+        
+        // PUT: {apibaseurl}/api/blogposts/{id}
+        [HttpPut]
+        [Route("{id:Guid}")]
+        public async Task<IActionResult> updateBlogPostById([FromRoute] Guid id, UpdateBlogPostRequestDto request)
+        {
+            // convert request DTO to model
+            var blogPost = new BlogPost
+            {
+                Id = id,
+                Author = request.Author,
+                Content = request.Content,
+                FeaturedImageUrl = request.FeaturedImageUrl,
+                IsVisible = request.IsVisible,
+                PublishedDate = request.PublishedDate,
+                ShortDescription = request.ShortDescription,
+                Title = request.Title,
+                UrlHandle = request.UrlHandle,
+                Categories = new List<Category>()
+            };
+            
+            // for each loop through all the categories and check at database
+            foreach (var categoryGuid in request.Categories)
+            {
+                // search category repo
+                var existingCategory = await _categoryRepository.GetById(categoryGuid);
+                if (existingCategory is not null)
+                {
+                    blogPost.Categories.Add(existingCategory);
+                }
+            }
+            
+            // call repository to update blogpost domain model
+            var updatedBlogPost = await _blogPostRepository.UpdateAsync(blogPost);
+            
+            if (updatedBlogPost is null)
+            {
+                return NotFound();
+            }
+            
+            // Convert Domain Model back to DTO
+            var response = new BlogPostDto
+            {
+                Id = updatedBlogPost.Id,
+                Author = updatedBlogPost.Author,
+                Content = updatedBlogPost.Content,
+                FeaturedImageUrl = updatedBlogPost.FeaturedImageUrl,
+                IsVisible = updatedBlogPost.IsVisible,
+                PublishedDate = updatedBlogPost.PublishedDate,
+                ShortDescription = updatedBlogPost.ShortDescription,
+                Title = updatedBlogPost.Title,
+                UrlHandle = updatedBlogPost.UrlHandle,
+                Categories = updatedBlogPost.Categories.Select(x => new CategoryDto
+                {
+                    Id = x.Id,
+                    Name = x.Name,
+                    UrlHandle = x.UrlHandle,
+                }).ToList()
+            };
+            
+            return Ok(response);
+        }
     }
 }
