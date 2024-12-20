@@ -12,4 +12,6 @@ public class BlogPost
     public string Author { get; set; }
     public bool IsVisible { get; set; }
     
+    // 1 blogpost can have multiple categories
+    public ICollection<Category> Categories { get; set; }
 }

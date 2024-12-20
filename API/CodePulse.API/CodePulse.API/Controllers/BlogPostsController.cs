@@ -15,10 +15,11 @@ namespace CodePulse.API.Controllers
     public class BlogPostsController : ControllerBase
     {
         private readonly IBlogPostRepository _blogPostRepository;
-        
-        public BlogPostsController(IBlogPostRepository blogPostRepository)
+        private readonly ICategoryRepository _categoryRepository;
+        public BlogPostsController(IBlogPostRepository blogPostRepository, ICategoryRepository categoryRepository)
         {
             this._blogPostRepository = blogPostRepository;
+            this._categoryRepository = categoryRepository;
         }
         
         [HttpPost]
@@ -35,7 +36,20 @@ namespace CodePulse.API.Controllers
                 ShortDescription = request.ShortDescription,
                 Title = request.Title,
                 UrlHandle = request.UrlHandle,
+                Categories = new List<Category>()
             };
+            
+            // Loop through each categories and select value that is present in database
+            foreach (var categoryGuid in request.Categories)
+            {
+                // see if category exist
+                var existingCategory = await _categoryRepository.GetById(categoryGuid);
+                if (existingCategory is not null)
+                {
+                    // ensure only valid category is added
+                    blogPost.Categories.Add(existingCategory);
+                }
+            }
             
             // pass to repository
             // returned created obj
@@ -53,6 +67,12 @@ namespace CodePulse.API.Controllers
                 ShortDescription = blogPost.ShortDescription,
                 Title = blogPost.Title,
                 UrlHandle = blogPost.UrlHandle,
+                Categories = blogPost.Categories.Select(x => new CategoryDto
+                {
+                    Id = x.Id,
+                    Name = x.Name,
+                    UrlHandle = x.UrlHandle,
+                }).ToList() //domain model to dto
             };
             
             return Ok(response);
@@ -79,6 +99,12 @@ namespace CodePulse.API.Controllers
                     ShortDescription = blogPost.ShortDescription,
                     Title = blogPost.Title,
                     UrlHandle = blogPost.UrlHandle,
+                    Categories = blogPost.Categories.Select(x => new CategoryDto
+                    {
+                        Id = x.Id,
+                        Name = x.Name,
+                        UrlHandle = x.UrlHandle,
+                    }).ToList()
                 });
             }
             
