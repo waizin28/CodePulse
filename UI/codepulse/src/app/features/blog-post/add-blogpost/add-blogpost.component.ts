@@ -29,6 +29,7 @@ export class AddBlogpostComponent implements OnInit {
       author: '',
       isVisible: true,
       publishedDate: new Date(),
+      categories: [],
     };
   }
   ngOnInit(): void {

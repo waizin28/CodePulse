@@ -128,7 +128,9 @@
             name="categories"
             id="categories"
             multiple
+            [(ngModel)]="addBlogModel.categories"
           >
+            <!-- When categories are chosen, the categories that are chosen will have its id pass as string array into addBlogModel.categories  -->
             <option *ngFor="let category of categories" [value]="category.id">
               {{ category.name }}
             </option>
