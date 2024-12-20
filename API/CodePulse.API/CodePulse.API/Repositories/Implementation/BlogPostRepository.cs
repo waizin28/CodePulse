@@ -28,4 +28,9 @@ public class BlogPostRepository: IBlogPostRepository
         // to include Categories
         return await _dbContext.BlogPosts.Include(x => x.Categories).ToListAsync();
     }
+
+    public async Task<BlogPost?> GetByIdAsync(Guid id)
+    {
+        return await _dbContext.BlogPosts.Include(x => x.Categories).FirstOrDefaultAsync(x => x.Id == id);
+    }
 }
