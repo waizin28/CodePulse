@@ -67,6 +67,13 @@
           <label for="featuredImageUrl" class="form-label"
             >Featured Image Url
             <!-- <button type="button" class="btn btn-light" (click)="openImageSelector()">Select Image</button> -->
+            <button
+              type="button"
+              class="btn btn-light"
+              (click)="openImageSelector()"
+            >
+              Select Image
+            </button>
           </label>
 
           <ng-container *ngIf="blogPostModel.featuredImageUrl !== ''">
@@ -157,4 +164,17 @@
 </div>
 
 <!-- Trying to load image selector inside edit blogpost -->
-<app-image-selector></app-image-selector>
+<div
+  class="images-container-modal"
+  [ngClass]="{ 'd-block': isImageSelectorOpen, 'd-none': !isImageSelectorOpen }"
+>
+  <button
+    type="button"
+    class="btn btn-light"
+    style="position: fixed; top: 10px; right: 10px"
+    (click)="closeImageSelector()"
+  >
+    X
+  </button>
+  <app-image-selector></app-image-selector>
+</div>

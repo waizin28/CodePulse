@@ -17,6 +17,7 @@ export class EditBlogpostComponent implements OnInit, OnDestroy {
   blogPostModel?: BlogPost;
   categories$?: Observable<Category[]>;
   selectedCategories?: string[];
+  isImageSelectorOpen: boolean = false;
 
   routeSubscription?: Subscription;
   updateBlogPostSubscription?: Subscription;
@@ -92,6 +93,14 @@ export class EditBlogpostComponent implements OnInit, OnDestroy {
           },
         });
     }
+  }
+
+  openImageSelector(): void {
+    this.isImageSelectorOpen = true;
+  }
+
+  closeImageSelector(): void {
+    this.isImageSelectorOpen = false;
   }
 
   ngOnDestroy(): void {
