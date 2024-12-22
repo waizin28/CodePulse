@@ -257,3 +257,6 @@
 /Users/waizinlinn/Desktop/CodePulse/API/CodePulse.API/CodePulse.API/bin/Debug/net7.0/runtimes/win/lib/net6.0/System.Drawing.Common.dll
 /Users/waizinlinn/Desktop/CodePulse/API/CodePulse.API/CodePulse.API/bin/Debug/net7.0/runtimes/win/lib/net6.0/System.Security.Cryptography.ProtectedData.dll
 /Users/waizinlinn/Desktop/CodePulse/API/CodePulse.API/CodePulse.API/bin/Debug/net7.0/runtimes/win/lib/net6.0/System.Windows.Extensions.dll
+/Users/waizinlinn/Desktop/CodePulse/API/CodePulse.API/CodePulse.API/bin/Debug/net7.0/Scrutor.dll
+/Users/waizinlinn/Desktop/CodePulse/API/CodePulse.API/CodePulse.API/bin/Debug/net7.0/Swashbuckle.AspNetCore.Filters.dll
+/Users/waizinlinn/Desktop/CodePulse/API/CodePulse.API/CodePulse.API/bin/Debug/net7.0/Swashbuckle.AspNetCore.Filters.Abstractions.dll
