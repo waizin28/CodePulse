@@ -28,6 +28,10 @@ export class ImageSelectorComponent implements OnInit {
     this.file = element.files?.item(0);
   }
 
+  selectImage(image: BlogImage): void {
+    this.imageService.selectImage(image);
+  }
+
   uploadImage(): void {
     if (this.file && this.fileName !== '' && this.title !== '') {
       // Image service to upload image

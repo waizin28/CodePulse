@@ -13,6 +13,7 @@
               style="min-width: 100px; justify-content: center; cursor: pointer"
               class="me-1 bg-white d-flex align-items-center flex-column border p-3"
               *ngFor="let image of images"
+              (click)="selectImage(image)"
             >
               <img
                 [src]="image.url"

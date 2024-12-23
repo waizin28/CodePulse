@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { BlogImage } from '../../models/blog-image.model';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
@@ -7,6 +7,15 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root',
 })
 export class ImageService {
+  // trigger multiple values of observale, subscriber will receive those changes
+  selectedImage: BehaviorSubject<BlogImage> = new BehaviorSubject<BlogImage>({
+    id: '',
+    fileName: '',
+    title: '',
+    fileExtension: '',
+    url: '',
+  });
+
   constructor(private http: HttpClient) {}
 
   getAllImages(): Observable<BlogImage[]> {
@@ -27,5 +36,14 @@ export class ImageService {
       `${environment.apiBaseUrl}/api/images`,
       formData
     );
+  }
+
+  selectImage(image: BlogImage): void {
+    // emit this value, want some subscriber to subscribe this value
+    this.selectedImage.next(image);
+  }
+
+  onSelectImage(): Observable<BlogImage> {
+    return this.selectedImage.asObservable();
   }
 }
