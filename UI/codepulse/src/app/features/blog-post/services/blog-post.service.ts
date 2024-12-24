@@ -19,6 +19,14 @@ export class BlogPostService {
     );
   }
 
+  /*************  ✨ Codeium Command ⭐  *************/
+  /**
+   * Retrieves all blog posts from the API.
+   *
+   * @returns An observable that emits an array of BlogPost objects.
+   */
+
+  /******  f5bcf732-2116-4a94-abf0-16846d7c709a  *******/
   getAllBlogPosts(): Observable<BlogPost[]> {
     return this.http.get<BlogPost[]>(`${environment.apiBaseUrl}/api/blogposts`);
   }
